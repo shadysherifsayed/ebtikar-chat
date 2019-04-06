@@ -1,71 +1,89 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+# Blog App
+### Prerequisites
+* [Composer](https://getcomposer.org/download/ "Download Composer")
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+-----------------------------------------------------------------------------------
 
-## About Laravel
+### Installation
+This is a guide that explains how to run this app on your local machine. Kindly, follow the following steps:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+  1. First step is to install all dependencies needed, use `composer install` command to install all needed dependencies from `composer.json`
+  
+  2. Use this command `php artisan key:generate` to generate an app key for **Laravel** 
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+  3. The main database name is `mumm_blog`, if you want to change it open `.env` file, and modify it with your DB credentials
+ ```sh
+// Change those lines
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=mumm_blog
+DB_USERNAME=root
+DB_PASSWORD=
+ ```
+ 
+ 4. The testing database name is `mumm_blog_testing`, if you want to change it open `phpunit.xml` file, and modify it with your DB credentials
+ ```sh
+ // Change those lines
+<env name="DB_CONNECTION" value="mysql" />
+<env name="DB_DATABASE" value="mumm_blog_testing" />
+<env name="DB_USERNAME" value="root" />        
+<env name="DB_PASSWORD" value="" />
+ ```
+  5. Setting up your DB connection **and** creating the DB **manually**, run this command `php artisan migrate` to migrate tables.
+  
+  6. You may run this command `php artisan storage:link` to create the symbolic link between storage folder and public folder.
+  
+  7. Lastly, you may run `php artisan serve` command. This command will start a development server.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+___
 
-## Learning Laravel
+### Notes
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+###### Admin Login
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost you and your team's skills by digging into our comprehensive video library.
+To login as an `admin`, the url will be `APP_URL\admin\login`
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+###### Testing
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
+To run all tests, run `phpunit` command and this will run all tests and then generate a `report` for you.
+> If the testing process takes a long time, that's normal since the database is refreshed after each test, for me it takes about `15 minutes`
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+###### Code Coverage Report
 
-## Security Vulnerabilities
+If you don't want to run all tests again, I've attached a report could be found in `public` folder with a name `code-coverage`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
+###### Database Seeding
 
-The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+I have created a seeder for the database to create dummy data for all application models(Post, Category, User, and Admin), you could run `php artisan migrate:fresh --seed`, or if you have already `migrated` the tables you could run `php artisan db:seed`, and after that `50 posts`, `10 categories`, `1 admin`, and also `1 user` will be created.
+```
+  // Admin data
+  [
+      'name' => 'Super Admin',
+      'username' => 'admin',
+      'email' => 'super@admin.com',
+      'password' => 123456,
+  ]
+  
+  // User data
+  [
+      'name' => 'Shady Sherif',
+      'username' => 'shady',
+      'email' => 'shady@user.com',
+      'password' => 123456,
+  ]
+```
+___
+
+### Help
+
+##### Error
+`SQLSTATE[42S01]: Base table or view already exists:`
+_**Solution**_
+Simply run the following commands
+``` sh
+$ php artisan migrate:fresh
+```
