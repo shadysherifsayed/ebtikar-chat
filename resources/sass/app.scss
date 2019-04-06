@@ -1,0 +1,87 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.navbar-laravel {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+
+    &-track {
+        background: transparent;
+    }
+
+    &-thumb {
+        background: #343a40;
+        width: 3px;
+
+        &:hover {
+            background: lighten(#343a40, 10);
+        }
+    }
+}
+
+body {
+    overflow-x: hidden;
+    max-width: 100vw;
+
+    .form-control,
+    .btn,
+    .custom-select {
+        border-radius: 0px;
+
+        &:focus,
+        &:hover {
+            outline: none;
+            box-shadow: none;
+        }
+    }
+}
+
+.chat-page {
+
+    .conversations {
+
+        .user-conversations,
+        .user-search {
+            height: 78vh;
+            overflow-y: scroll;
+
+            .conversation {
+                padding: 1rem;
+                transition: 0.4s all;
+                font-size: 1.25rem;
+                text-align: center;
+                color: #343a40;
+                text-decoration: none;
+
+                &.active,
+                &:hover {
+                    background: #343a40;
+                    color: #fff;
+                }
+            }
+        }
+
+        .user-search {
+            display: none;
+        }
+    }
+
+    .messages {
+        .conversation-messages {
+            height: 70vh;
+            overflow-y: scroll;
+            margin-bottom: 2vh;
+        }
+    }
+
+}
